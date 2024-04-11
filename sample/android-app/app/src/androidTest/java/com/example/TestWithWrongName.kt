@@ -10,7 +10,6 @@ class TestWithWrongName {
     @get:Rule
     val rule = ActivityScenarioRule(MainActivity::class.java)
 
-    val screen = MainScreen()
 
     @Test
     fun testAlwaysFailing() {

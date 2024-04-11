@@ -1,10 +1,12 @@
+import com.malinskiy.marathon.config.strategy.ExecutionMode
+import com.malinskiy.marathon.config.strategy.ExecutionStrategyConfiguration
 import com.malinskiy.marathon.config.vendor.android.TestAccessConfiguration
 import com.malinskiy.marathon.config.vendor.android.TestParserConfiguration
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("com.malinskiy.marathon") version "0.9.1-SNAPSHOT"
+    id("com.malinskiy.marathon") version "0.10.0"
 }
 
 android {
@@ -51,6 +53,13 @@ android {
 }
 
 marathon {
+    executionStrategy = ExecutionStrategyConfiguration(ExecutionMode.ANY_SUCCESS)
+    retryStrategy {
+        fixedQuota {
+            retryPerTestQuota = 1
+            totalAllowedRetryQuota = 100
+        }
+    }
     allureConfiguration {
         enabled = true
     }
